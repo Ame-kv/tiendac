@@ -13,6 +13,13 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
+
+            $table->string('name');
+            $table->string('email')->unique();
+            $table->timestamp('email_verified_at')->nullable(); //fecha y hora en el que el correo del usuario fue verificado
+            $table->string('password');
+            $table->rememberToken(); //token de recordar sesion 
+
             $table->timestamps();
         });
     }
