@@ -16,7 +16,7 @@ class Coupon extends Model
     }
 
     public function checkIfValid() {
-        if($this->valid_until > Carbon::now()) { 
+        if($this->valid_until > Carbon::now()) {      //carbon es metodo para que devuelva fecha y hora actual
             return true;
         } 
         else {
