@@ -1,18 +1,21 @@
 <?php
 
+use App\Http\Middleware\AdminMiddleware;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 
 return Application::configure(dirname(__DIR__))
-    ->withRouting(
-        __DIR__.'/../routes/web.php',
-        __DIR__.'/../routes/console.php',
-        '/up',
-    )
-    ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->alias(["admin" => AdminMiddleware::class]);
+    ->withRouting(function () {
+        require __DIR__ . '/../routes/web.php';
+        require __DIR__ . '/../routes/console.php';
     })
-    ->withExceptions(function (Exceptions $exceptions): void {
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias([
+            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+        ]);
+    })
+    ->withExceptions(function (Exceptions $exceptions) {
         //
-    })->create();
+    })
+    ->create();

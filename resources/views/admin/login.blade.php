@@ -10,24 +10,47 @@
     <div class="container">
         <div class="row my-5">
             <div class="col-md-6 mx-auto">
+                @session('error')
+                    <div class="alert alert-danger my-2">
+                        {{session('error')}}
+                    </div>
+                @endsession
                 <div class="card shadow-sm p-5">
                     <div class="card-header bg-white text-center">
                         <h3 class="mt-2">LOGIN</h3>
                     </div>
                     <div class="card-body">
-                        <form action="" method="POST">
+                        <form action="{{route('admin.auth')}}" method="POST">
                             @csrf
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" name="email"
+                                <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
                                  id="floatingInput" placeholder="Correo electrónico">
                                 <label for="floatingInput">Correo electrónico</label>
+                                @error('email')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+
+
+                                    </span>
+                                @enderror
                                 </div>
                                 <div class="form-floating mb-3">
-                                <input type="password" class="form-control" name="password" 
+                                <input type="password" class="form-control @error('password') is-invalid @enderror"" name="password" 
                                 id="floatingPassword" placeholder="Contraseña">
                                 <label for="floatingPassword">Contraseña</label>
+                                @error('password')
+                                    <span class="invalid-feedback">
+                                        <strong>{{$message}}</strong>
+
+
+                                    </span>
+                                @enderror
                             </div>
-                            
+                            <div class="mb-2">
+                                <button type="submit" class="btn btn-lg btn-primary">
+                                    Iniciar Sesión
+                                </button>
+                            </div>
                         </form>
                     </div>
                 </div>
