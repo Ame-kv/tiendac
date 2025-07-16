@@ -22,7 +22,19 @@ class AuthAdminRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'email' => 'required|email|max:255',
+            'password' => 'required|min:6|max:255',
+        ];
+    }
+    public function messages(): array
+    {
+        return[
+            'email.required' => 'El campo correo electrónico es obligatorio',
+            'email.email' => 'El correo electrónico debe ser una dirección válida'
+            'eamil.max' => 'el correo electrónico no puede tener más de 255 caracteres'
+            'password.required' => 'El campo contraseña es obligatorio',
+            'password.min' => 'la contraseña debe tener al menos 6 caracteres',
+            'password.max' => 'la contraseña no puede tener más de 255 caracteres',
         ];
     }
 }

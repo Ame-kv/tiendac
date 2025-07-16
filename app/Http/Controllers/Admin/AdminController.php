@@ -9,7 +9,19 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
     public function index(){
-        return view('admin.index');
+
+        $todayOrders = Order::whereDay('created_at', Carbon::today())->get();
+        $yesterdayOrders = Order::whereDay('created_at', Carbon::yesterday())->get();
+        $monthOrders = Order::whereMonth('created_at', Carbon::now()->month)->get();
+        $yearOrders = Order::whereYear('created_at', Carbon::now()->year)->get();
+
+        return view('admin.index')->whit([
+            'todayOrders' => $todayOrders,
+            'yesterdayOrders' => $yesterdayOrders,
+            'monthOrders' => $monthOrders,
+            'yearOrders' => $yearOrders,
+        ]);
+
     }
 
     public function login(){
