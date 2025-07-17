@@ -46,4 +46,8 @@ class AdminController extends Controller
             }
         }
     }
+    public function logout(){
+        auth()->guard('admin')->logout;
+        return redirect()->route('admin.index');
+    }
 }
